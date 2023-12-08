@@ -7,7 +7,12 @@ class PersonController < ApplicationController
   def create
     @person = Person.new(person_params)
 
-    if @person.save
+    @temp = @person.save
+
+    Rails.logger.info @temp
+    Rails.logger.info ""
+
+    if @temp
       render json: @person, status: :created
     else
       render json: {error: 'Person creation failed'}, status: :unprocessable_entity

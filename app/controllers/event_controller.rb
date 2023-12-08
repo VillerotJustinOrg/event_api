@@ -45,8 +45,9 @@ class EventController < ApplicationController
   end
 
   def type 
-    @eventType = Event.find(params[:id]).event_type
+    event_types_id = Event.find(params[:id]).event_types_id
 
+    @eventType = EventType.find(event_types_id)
     if @eventType
       render json: @eventType
     else 
@@ -55,12 +56,12 @@ class EventController < ApplicationController
   end
 
   def present
-    @est_present = Event.find(params[:id]).est_present
+    @present = EstPresent.find_by event_id: params[:id]
 
-    if @est_present
-      render json: @est_present
+    if @present
+      render json: @present
     else 
-      render json: { error: 'Present person not found'}, status: :not_found
+      render json: { error: 'No present person not found'}, status: :not_found
     end
   end
 
@@ -69,7 +70,10 @@ class EventController < ApplicationController
   private
 
   def event_params
+    
+
     params.permit(
+      :event_types_id,
       :name,
       :latitude,
       :longitude,
@@ -78,9 +82,7 @@ class EventController < ApplicationController
       :phone,
       :website,
       :image,
-      :rating,
-      :event_type_id,
-      :est_present_id
+      :rating
       )
   end
 

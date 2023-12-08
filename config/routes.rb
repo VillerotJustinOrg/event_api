@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Event Type Route
+
+  #CRUD
   get '/event_type', to: 'event_type#index'
   post '/event_type', to: 'event_type#create'
   get '/event_type/:id', to: 'event_type#show'
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
 
   # Person Route
 
+  #CRUD
   get '/person', to: 'person#index'
   post '/person', to: 'person#create'
   get '/person/:id', to: 'person#show'
@@ -22,21 +25,24 @@ Rails.application.routes.draw do
 
   # Event Route
 
+  #CRUD
   get '/event', to: 'event#index'
   post '/event', to: 'event#create'
-  get '/event/:id', to: 'event#show'            #Show one event
-  get '/event/:id/type', to: 'event#type'       #Show event type
-  get '/event/:id/present', to: 'event#present' #Show person present in event
+  get '/event/:id', to: 'event#show'
   patch '/event/:id', to: 'event#update'
   delete '/event/:id', to: 'event#destroy'
 
+  # Other
+  get '/event/:id/type', to: 'event#type'       #Show event type
+  get '/event/:id/present', to: 'event#present' #Show person present in event
+
   # Est Present Route
 
+  #CRUD
   get '/est_present', to: 'est_present#index'
   post '/est_present', to: 'est_present#create'
   get '/est_present/:id', to: 'est_present#show'
   delete '/est_present/:id', to: 'est_present#destroy'
-
 
   # Defines the root path route ("/")
   # root "posts#index"

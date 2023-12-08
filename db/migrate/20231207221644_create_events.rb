@@ -1,6 +1,7 @@
 class CreateEvents < ActiveRecord::Migration[7.1]
   def change
     create_table :events do |t|
+      t.belongs_to :event_types
       t.string :name
       t.float :latitude
       t.float :longitude

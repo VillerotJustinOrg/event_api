@@ -1,11 +1,11 @@
 class EstPresentController < ApplicationController
   def index
-    @est_presents = Est_Present.all
+    @est_presents = EstPresent.all
     render json: @est_presents
   end
 
   def create
-    @est_present = Est_Present.new(arrival_time)
+    @est_present = EstPresent.new(arrival_time)
 
     if @est_present.save
       render json: @est_present, status: :created
@@ -15,7 +15,7 @@ class EstPresentController < ApplicationController
   end
 
   def show
-    @est_present = Est_Present.find(params[:id])
+    @est_present = EstPresent.find(params[:id])
     
     if @est_present
       render json: @est_present, status: :ok
@@ -25,7 +25,7 @@ class EstPresentController < ApplicationController
   end
 
   def destroy
-    @est_present = Est_Present.find(params[:id])
+    @est_present = EstPresent.find(params[:id])
     
     if @est_present.destroy
       render json: { message: 'Est_present successfully deleted' }, status: :ok
@@ -38,8 +38,9 @@ class EstPresentController < ApplicationController
 
   def arrival_time
     params.permit(
-      :arrival_time
-      :person_id
+      :time,
+      :persons_id,
+      :event_id
     )
   end
 

@@ -13,8 +13,12 @@
 ActiveRecord::Schema[7.1].define(version: 2023_12_07_225050) do
   create_table "est_presents", force: :cascade do |t|
     t.datetime "time"
+    t.integer "persons_id"
+    t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_est_presents_on_event_id"
+    t.index ["persons_id"], name: "index_est_presents_on_persons_id"
   end
 
   create_table "event_types", force: :cascade do |t|
@@ -24,6 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_225050) do
   end
 
   create_table "events", force: :cascade do |t|
+    t.integer "event_types_id"
     t.string "name"
     t.float "latitude"
     t.float "longitude"
@@ -35,6 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_07_225050) do
     t.float "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_types_id"], name: "index_events_on_event_types_id"
   end
 
   create_table "people", force: :cascade do |t|
