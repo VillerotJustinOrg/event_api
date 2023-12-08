@@ -5,6 +5,39 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
+  # Event Type Route
+  get '/event_type', to: 'event_type#index'
+  post '/event_type', to: 'event_type#create'
+  get '/event_type/:id', to: 'event_type#show'
+  patch '/event_type/:id', to: 'event_type#update'
+  delete '/event_type/:id', to: 'event_type#destroy'
+
+  # Person Route
+
+  get '/person', to: 'person#index'
+  post '/person', to: 'person#create'
+  get '/person/:id', to: 'person#show'
+  patch '/person/:id', to: 'person#update'
+  delete '/person/:id', to: 'person#destroy'
+
+  # Event Route
+
+  get '/event', to: 'event#index'
+  post '/event', to: 'event#create'
+  get '/event/:id', to: 'event#show'            #Show one event
+  get '/event/:id/type', to: 'event#type'       #Show event type
+  get '/event/:id/present', to: 'event#present' #Show person present in event
+  patch '/event/:id', to: 'event#update'
+  delete '/event/:id', to: 'event#destroy'
+
+  # Est Present Route
+
+  get '/est_present', to: 'est_present#index'
+  post '/est_present', to: 'est_present#create'
+  get '/est_present/:id', to: 'est_present#show'
+  delete '/est_present/:id', to: 'est_present#destroy'
+
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
