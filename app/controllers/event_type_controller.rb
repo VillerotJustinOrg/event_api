@@ -1,11 +1,12 @@
 class EventTypeController < ApplicationController
   def index
-    @event_types = Event_type.all
+    @event_types = EventType.all
     render json: @event_types
   end
 
   def create
-    @event_type = Event_type.new(event_type_type_params)
+
+    @event_type = EventType.new(event_type_params)
 
     if @event_type.save
       render json: @event_type, status: :created
@@ -15,7 +16,7 @@ class EventTypeController < ApplicationController
   end
 
   def show
-    @event_type = Event_type.find(params[:id])
+    @event_type = EventType.find(params[:id])
     
     if @event_type
       render json: @event_type, status: :ok
@@ -25,9 +26,9 @@ class EventTypeController < ApplicationController
   end
 
   def update
-    @event_type = Event_type.find(params[:id])
+    @event_type = EventType.find(params[:id])
     
-    if @event_type.update(event_type_type_params)
+    if @event_type.update(event_type_params)
       render json: @event_type, status: :ok
     else
       render json: {error: 'Event_type update failed'}, status: :unprocessable_entity
@@ -35,7 +36,7 @@ class EventTypeController < ApplicationController
   end
 
   def destroy
-    @event_type = Event_type.find(params[:id])
+    @event_type = EventType.find(params[:id])
     
     if @event_type.destroy
       render json: { message: 'Event_type successfully deleted' }, status: :ok
