@@ -56,7 +56,10 @@ class EventController < ApplicationController
   end
 
   def present
-    @present = EstPresent.find_by event_id: params[:id]
+
+    @present = EstPresent.where("event_id = ?", params[:id])
+    
+    #@present = EstPresent.all
 
     if @present
       render json: @present
