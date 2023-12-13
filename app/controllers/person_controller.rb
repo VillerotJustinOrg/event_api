@@ -5,17 +5,24 @@ class PersonController < ApplicationController
   end
 
   def create
-    @person = Person.new(person_params)
+    # Find Person if exits
+    @person = Person.where("pseudo = :psd and mdp = :paswd", psd: person_params[:pseudo], paswd: person_params[:mdp] )
 
-    @temp = @person.save
-
-    Rails.logger.info @temp
-    Rails.logger.info ""
-
-    if @temp
-      render json: @person, status: :created
+    if @person
+      render json: @person, status: :ok
     else
-      render json: {error: 'Person creation failed'}, status: :unprocessable_entity
+      @person = Person.new(person_params)
+
+      @temp = @person.save
+
+      Rails.logger.info @temp
+      Rails.logger.info ""
+
+      if @temp
+        render json: @person, status: :created
+      else
+        render json: {error: 'Person creation failed'}, status: :unprocessable_entity
+      end
     end
   end
 
