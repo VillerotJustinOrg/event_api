@@ -6,10 +6,23 @@ class PersonController < ApplicationController
 
   def create
     # Find Person if exits
-    @person = Person.where("pseudo = :psd and mdp = :paswd", psd: person_params[:pseudo], paswd: person_params[:mdp] )
+    @person = Person.where("mail = :ml", ml: person_params[:mail])
 
-    if @person
-      render json: @person, status: :ok
+    if @person != []
+      @mdp = @person[0]["mdp"]
+      Rails.logger.info ""
+      Rails.logger.info "person"
+      Rails.logger.info ""
+      Rails.logger.info @mdp
+      Rails.logger.info person_params[:mdp]
+      Rails.logger.info ""
+      Rails.logger.info "Person end"
+
+      if @mdp != person_params[:mdp]
+        render json: {error: 'Login Failed'}, status: :unprocessable_entity
+      else
+        render json: @person, status: :ok
+      end 
     else
       @person = Person.new(person_params)
 
