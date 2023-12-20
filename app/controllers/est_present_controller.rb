@@ -24,6 +24,16 @@ class EstPresentController < ApplicationController
     end
   end
 
+  def update
+    @est_present = EstPresent.find(params[:id])
+    
+    if @est_present.update(arrival_time)
+      render json: @est_present, status: :ok
+    else
+      render json: {error: 'Event update failed'}, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @est_present = EstPresent.find(params[:id])
     
