@@ -5,20 +5,25 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version 3.2.2
 
-* System dependencies
+* Rails version 7.1.2
 
-* Configuration
+* initialization of the project and dependencies instalation
 
-* Database creation
+```bash
+$ sudo apt-get install sqlite3 libsqlite3-dev
+$ gem install bundler
+$ gem update bundler
+$ bundle install --without db
+```
 
 * Database initialization
 
-* How to run the test suite
+```bash
+rail db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+* Route
 
-* Deployment instructions
-
-* ...
+There is a postman collection in the last release
