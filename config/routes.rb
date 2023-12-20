@@ -45,6 +45,8 @@ Rails.application.routes.draw do
   patch '/est_present/:id', to: 'est_present#update'
   delete '/est_present/:id', to: 'est_present#destroy'
 
+  get '/person/:id/event', to: 'est_present#where'
+
   # Defines the root path route ("/")
   # root "posts#index"
 end

@@ -44,6 +44,29 @@ class EstPresentController < ApplicationController
     end
   end
 
+  def where
+    @est_present = EstPresent.where("persons_id = ?", params[:id])
+
+    Rails.logger.info ""
+    Rails.logger.info "est_present"
+    Rails.logger.info ""
+    Rails.logger.info @est_present
+    Rails.logger.info ""
+    Rails.logger.info "est_present end"
+
+    if @est_present != []
+      @event = Event.find(@est_present[0]["event_id"])
+
+      if @event != []
+        render json: @event, status: :ok
+      else
+        render json: {error: 'Person might not be in event'}, status: :not_found
+      end
+    else
+      render json: {error: 'Est_present not found'}, status: :not_found
+    end
+  end
+
   private
 
   def arrival_time
