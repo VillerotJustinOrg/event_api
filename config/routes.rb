@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   get '/est_present', to: 'est_present#index'
   post '/est_present', to: 'est_present#create'
   get '/est_present/:id', to: 'est_present#show'
+  patch '/est_present/:id', to: 'est_present#update'
   delete '/est_present/:id', to: 'est_present#destroy'
 
   # Defines the root path route ("/")
