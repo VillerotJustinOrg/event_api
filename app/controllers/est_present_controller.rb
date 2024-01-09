@@ -25,11 +25,12 @@ class EstPresentController < ApplicationController
   end
 
   def update
+
     @est_present = EstPresent.where("persons_id = :id_P", id_P: params[:id])
     
     upd_param = {
       'time' => arrival_time[:time],
-      'id_persons' => params[:id],
+      'persons_id' => params[:id],
       'event_id' => arrival_time[:event_id]
     }
 
