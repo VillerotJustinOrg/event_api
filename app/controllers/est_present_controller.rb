@@ -25,9 +25,15 @@ class EstPresentController < ApplicationController
   end
 
   def update
-    @est_present = EstPresent.find(params[:id])
+    @est_present = EstPresent.where("persons_id = :id_P", id_P: params[:id])
     
-    if @est_present.update(arrival_time)
+    upd_param = {
+      'time' => arrival_time[:time],
+      'id_persons' => params[:id],
+      'event_id' => arrival_time[:event_id]
+    }
+
+    if @est_present.update(upd_param)
       render json: @est_present, status: :ok
     else
       render json: {error: 'Event update failed'}, status: :unprocessable_entity
@@ -72,7 +78,6 @@ class EstPresentController < ApplicationController
   def arrival_time
     params.permit(
       :time,
-      :persons_id,
       :event_id
     )
   end

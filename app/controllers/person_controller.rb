@@ -5,6 +5,22 @@ class PersonController < ApplicationController
   end
 
   def create
+    Person.where("mail = :ml", ml: person_params[:mail])
+    if @person != []
+      render json: {error: 'Person Already exist'}, status: :unprocessable_entity
+    end
+
+    @person = Person.new(person_params)
+
+    if @person.save
+      render json: @person, status: :created
+    else
+      render json: {error: 'Person creation failed'}, status: :unprocessable_entity
+    end
+    
+  end
+
+  def log_in
     # Find Person if exits
     @person = Person.where("mail = :ml", ml: person_params[:mail])
 
@@ -23,19 +39,6 @@ class PersonController < ApplicationController
       else
         render json: @person, status: :ok
       end 
-    else
-      @person = Person.new(person_params)
-
-      @temp = @person.save
-
-      Rails.logger.info @temp
-      Rails.logger.info ""
-
-      if @temp
-        render json: @person, status: :created
-      else
-        render json: {error: 'Person creation failed'}, status: :unprocessable_entity
-      end
     end
   end
 
