@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   #CRUD
   get '/event_type', to: 'event_type#index'
   post '/event_type', to: 'event_type#create'
-  post '/log_in', to: 'event_type#log_in'
   get '/event_type/:id', to: 'event_type#show'
   patch '/event_type/:id', to: 'event_type#update'
   delete '/event_type/:id', to: 'event_type#destroy'
@@ -20,6 +19,7 @@ Rails.application.routes.draw do
   #CRUD
   get '/person', to: 'person#index'
   post '/person', to: 'person#create'
+  post '/log_in', to: 'person#log_in'
   get '/person/:id', to: 'person#show'
   patch '/person/:id', to: 'person#update'
   delete '/person/:id', to: 'person#destroy'

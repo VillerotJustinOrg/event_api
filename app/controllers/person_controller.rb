@@ -5,9 +5,10 @@ class PersonController < ApplicationController
   end
 
   def create
-    Person.where("mail = :ml", ml: person_params[:mail])
+    @person = Person.where("mail = :ml", ml: person_params[:mail])
     if @person != []
       render json: {error: 'Person Already exist'}, status: :unprocessable_entity
+      return
     end
 
     @person = Person.new(person_params)
