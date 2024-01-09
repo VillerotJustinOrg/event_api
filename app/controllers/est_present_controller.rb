@@ -42,8 +42,19 @@ class EstPresentController < ApplicationController
   end
 
   def destroy
-    @est_present = EstPresent.where("persons_id = :id_P", id_P: params[:id])
-    
+    @est_present = EstPresent.where("persons_id = :id_P", id_P: params[:id])[0]
+
+    if @est_present == []
+      render json: {error: 'Est_present not found'}, status: :internal_server_error
+      return
+    end
+
+    Rails.logger.info ""
+    Rails.logger.info ""
+    Rails.logger.info @est_present
+    Rails.logger.info ""
+    Rails.logger.info ""
+
     if @est_present.destroy
       render json: { message: 'Est_present successfully deleted' }, status: :ok
     else
@@ -79,7 +90,8 @@ class EstPresentController < ApplicationController
   def arrival_time
     params.permit(
       :time,
-      :event_id
+      :event_id,
+      :persons_id
     )
   end
 
