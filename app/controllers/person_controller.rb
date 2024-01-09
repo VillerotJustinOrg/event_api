@@ -38,7 +38,7 @@ class PersonController < ApplicationController
       if @mdp != person_params[:mdp]
         render json: {error: 'Login Failed'}, status: :unprocessable_entity
       else
-        render json: @person, status: :ok
+        render json: @person[0], status: :ok
       end 
     end
   end

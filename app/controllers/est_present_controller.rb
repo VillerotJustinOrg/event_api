@@ -42,7 +42,7 @@ class EstPresentController < ApplicationController
   end
 
   def destroy
-    @est_present = EstPresent.find(params[:id])
+    @est_present = EstPresent.where("persons_id = :id_P", id_P: params[:id])
     
     if @est_present.destroy
       render json: { message: 'Est_present successfully deleted' }, status: :ok
